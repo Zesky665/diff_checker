@@ -21,10 +21,11 @@ if zip1_file and zip2_file:
     
     results = compare_zips(zip1_bytes, zip2_bytes)
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     col1.metric("Files only in ZIP 1", len(results['files_only_in_zip1']))
     col2.metric("Files only in ZIP 2", len(results['files_only_in_zip2']))
     col3.metric("Common Files", len(results['common_files']))
+    col4.metric("Files with Different Content", len(results['files_with_different_content']))
     
     st.markdown("---")
     
@@ -61,6 +62,21 @@ if zip1_file and zip2_file:
     with st.expander("View all common files"):
         for file in results['common_files']:
             st.text(file)
+
+    st.markdown("---")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader(f"Files with Identical Content ({len(results['files_with_identical_content'])})")
+        with st.expander("View files with identical content"):
+            for file in results['files_with_identical_content']:
+                st.text(file)
+
+    with col2:
+        st.subheader(f"Files with Different Content ({len(results['files_with_different_content'])})")
+        with st.expander("View files with different content"):
+            for file in results['files_with_different_content']:
+                st.text(file)
 
 st.markdown("---")
 st.write("Ready to use on Streamlit Community Cloud!")
