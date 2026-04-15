@@ -15,7 +15,7 @@ A Streamlit application to compare the contents and structure of two ZIP files.
 ### Local Development
 ```bash
 pip install -r requirements.txt
-streamlit run app.py
+streamlit run app.py --server.headless true --server.port 8501 &
 ```
 
 ### Cloud Deployment
